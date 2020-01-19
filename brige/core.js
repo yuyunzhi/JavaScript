@@ -42,42 +42,4 @@ class CoreBrige {
 
 }
 
-
-// 从原生接口中拿到用户是否登录的状态，来更新vuex
-bridge.callHandler('getUserInfo', { 'param': 123 }, (responseData) => {
-    console.log('getUserInfo', responseData)
-    const { isLogin, userInfo } = JSON.parse(responseData)
-    console.log('isLogin', isLogin, JSON.parse(userInfo))
-    if (isLogin) {
-        this.$store.commit('userLogIn', JSON.parse(userInfo))
-        this.$router.push('/terminal/rank')
-    }
-})
-
-// showPage更新包原生控制loading隐藏
-bridge.callHandler('showPage', { 'param': 123 }, (responseData) => {
-    console.log('showPage事件', responseData)
-})
-
-// 监听401
-bridge.registerHandler('XHBHandleError', data => {
-    const code = JSON.parse(data).code
-    console.log('原生回调的方法结果111111', data, code)
-    if (code === 401) {
-        console.log('进来了了吗')
-        this.$store.commit('userLogOut')
-        this.$router.push('/')
-    }
-})
-
-// 持续监听NFC事件
-bridge.registerHandler('XHBAPPDeviceInfo', data => {
-    console.log('原生回调的方法结果', data)
-    if (this.$store.state.isLogin) {
-        this.goToStudentInformationPage(data)
-    } else {
-        this.goToLoginPage()
-    }
-})
-
 export default new CoreBrige()
