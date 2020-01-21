@@ -21,9 +21,29 @@ Student.prototype.constructor = Student
 let s1 = new Student ('小明', 11)
 let s2 = new Student ('小红', 12)
 
-// 此时有
+// 此时有 s1.__proto__的原型链
+
+s1.__proto__ === Student.prototype
+Student.prototype.__proto__ === Person.prototype //这一步是 Object.create(Person.prototype) 改变的
+Person.prototype.__proto__ === Object.prototype
+
+// Student.__proto__的原型链
+Student.__proto__ === Function.prototype
+Function.prototype.__proto__ === Object.prototype
+
+// Person.__proto__的原型链
+Person.__proto__ === Function.prototype
+Function.prototype.__proto__ === Object.prototype
+
+// s1的constructor
+s1.constructor === Student
 s1.__proto__.constructor === Student
 s1.__proto__.__proto__.constructor === Person
+
+// Student
+s1.constructor === Student
+Student.constructor === Function
+Person.constructor === Function
 
 // 所以
 
