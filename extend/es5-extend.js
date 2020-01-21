@@ -9,12 +9,13 @@ function Student (name,number) {
     Person.call(this,name)
     this.number = number
 }
-//继承原型链 相当于 Student.prototype.__proto__=Person.prototype
+//继承原型链 相当于 Student.prototype.__proto__ = Person.prototype
 // 而Person.prototype.constructor === Person
 Student.prototype = Object.create(Person.prototype)
 // 修复构造函数的指向
 Student.prototype.constructor = Student
 
+// 优势，可传参，函数可复用，不需要调用两次父类构造函数
 // 使用方式
 
 let s1 = new Student ('小明', 11)
