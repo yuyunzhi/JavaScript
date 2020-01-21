@@ -28,7 +28,7 @@ Student.prototype.__proto__ === Person.prototype //这一步是 Object.create(Pe
 Person.prototype.__proto__ === Object.prototype
 
 // Student.__proto__的原型链
-Student.__proto__ === Function.prototype
+Student.__proto__ === Function.prototype // 在es6 class里继承，子类可以找到父类
 Function.prototype.__proto__ === Object.prototype
 
 // Person.__proto__的原型链
