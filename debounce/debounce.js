@@ -37,4 +37,7 @@ function useDebounce (value,delay=300) {
 // 使用方式
 const debounceValue = useDebounce(value,5000)
 
+useEffect(()=>{
+  // TODO 发送请求
+},[debounceValue])
 
