@@ -6,7 +6,6 @@ function myCall(context,...args) {
     // 2
     context = context || window
     // 3
-    const fn = Symbol()
     context.fn = this
     // 4
     const result = context.fn(...args)
@@ -19,3 +18,7 @@ function myCall(context,...args) {
 Function.prototype.myCall = myCall
 
 // getName.myCall(obj， 'str1', 'str2')
+
+
+
+
