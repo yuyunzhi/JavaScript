@@ -5,7 +5,7 @@ function curry(fn){
             return fn(...args)
         }else{
             return (...args2)=>{
-                return generator(...args,...args2)
+              return generator(...args,...args2)
             }
         }
     }
@@ -13,9 +13,12 @@ function curry(fn){
 }
 
 // 使用方式
-let add = (a,b,c,d ) => a+b+c+d
-const curriedAdd = curry(add)
+let add = (a,b,c,d) => a+b+c+d
+const curriedAdd = curry(add) //generator
 curriedAdd(5)(6)(7)(8)
 curriedAdd(5,6)(7)(8)
 curriedAdd(5,6,7,8)
+
+
+
 

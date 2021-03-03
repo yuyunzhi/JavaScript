@@ -20,5 +20,3 @@ Function.prototype.myCall = myCall
 // getName.myCall(obj， 'str1', 'str2')
 
 
-
-
