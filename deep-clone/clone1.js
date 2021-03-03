@@ -13,3 +13,4 @@ export function clone(target) {
     }
     return cloneTarget;
 }
+

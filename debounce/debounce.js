@@ -7,7 +7,7 @@ function debounce (fn,delay){
     if(timer){
       clearTimeout(timer)
     }
-    setTimeout(()=>{
+    timer = setTimeout(()=>{
       fn(...params)
     },delay)
   }
@@ -40,4 +40,22 @@ const debounceValue = useDebounce(value,5000)
 useEffect(()=>{
   // TODO 发送请求
 },[debounceValue])
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
