@@ -1,7 +1,6 @@
 function myNew (fn ,...rest) {
-    let obj = {}
-    obj.__proto = fn.prototype
-    let res = fn.apply(obj, ...rest)
+    let obj = Object.create(fn.prototype)
+    let res = fn.apply(obj,rest)
     return res instanceof Object ? res : obj;
 }
 
