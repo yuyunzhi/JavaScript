@@ -1,12 +1,10 @@
 function myNew (fn ,...rest) {
-    let obj = Object.create(fn.prototype)
-    let res = fn.apply(obj,rest)
-    return res instanceof Object ? res : obj;
+  let obj = Object.create(fn.prototype)
+  let res = fn.apply(obj,rest)
+  return res instanceof Object ? res : obj;
 }
 
-
 // 使用方式
-
 function Person(name, age, job) {
     this.name = name;
     this.age = age;
@@ -17,3 +15,5 @@ function Person(name, age, job) {
 }
 
 let p1 = myNew(Person,"Ysir",24,"stu");
+
+console.log('p1',p1);
