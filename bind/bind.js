@@ -1,13 +1,15 @@
-Array.prototype.myBind = function (context,...args){
+Array.prototype.myBind =  function (context,...rest){
+  if(typeof this !== 'function'){
+    throw TypeError('not a function')
+  }
+  context = context | window
+  context.fn = this
 
-      const rawFn = this
-
-      const newFn = function (){
-        rawFn.call(context,...args)
-      }
-
-      return newFn
+  let newFnx = function (){
+    context.fn(...rest)
+  }
+  return newFnx
 }
 
-
 const a = b.bind('xxx',...args)
+
