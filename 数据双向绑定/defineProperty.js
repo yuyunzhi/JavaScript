@@ -36,6 +36,7 @@ observe(data)
 
 // console.log(data.name)
 // data.name = 'valley'
-data.friends[0] = 4
-// data.friends[3] = 5 // 非响应式
+// data.friends[0] = 4
+data.friends[3] = 5 // 非响应式
 // data.age = 6  //非响应式
+console.log(data.friends,data.friends[3]);
