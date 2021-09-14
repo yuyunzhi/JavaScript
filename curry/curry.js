@@ -17,7 +17,7 @@ let add = (a,b,c,d) => a+b+c+d
 const curriedAdd = curry(add) //generator
 curriedAdd(5)(6)(7)(8)
 curriedAdd(5,6)(7)(8)
-curriedAdd(5,6,7,8)
+console.log(curriedAdd(5, 6, 7, 8));
 
 
 
