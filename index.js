@@ -1,20 +1,42 @@
-function myInstanceof(a,b){
-  let leftValue = a.__proto__
-  let rightValue = b.prototype
-  while(true){
-    if(leftValue === rightValue){
-      return true
-    }
-    if(!leftValue) return false
-    leftValue = leftValue.__proto__
-  }
+const delayer = (t)=>{
+  return new Promise((resolve,reject)=>{
+      setTimeout(()=>{
+        if(Math.random()>0.99) {
+          resolve(t)
+        }else{
+          reject('delayer 失败了')
+        }
+      },t)
+  })
 }
 
-Array.prototype.myEach = function (fn){
-   let arr  =  Array.prototype.slice.call(this)
-  for(let i = 0;i<arr.length;i++){
-      if(arr[i].hasOwnProperty(i))
-      fn(arr[i],i,arr)
-  }
+function* start(r){
+  console.log(1);
+  const t1 = yield delayer(1000)
+  console.log(2,t1);
+  const t2 = yield delayer(1000)
+  console.log(3,t2);
 }
+
+function run (gFen,...initValue){
+  const gen = gFen(...initValue)
+  function next(data){
+    return new Promise((resolve,reject)=>{
+      const result = gen.next(data)
+      if(result.done) return
+      result.value.then(res=>{
+        next(res)
+      }).catch(err=>{
+        console.log('next error',err);
+        reject(err)
+      })
+    })
+
+  }
+  return next()
+}
+
+run(start,'r').catch(err=>{
+  console.log('run err',err);
+})
 
