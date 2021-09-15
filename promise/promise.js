@@ -1,3 +1,5 @@
+// https://juejin.cn/post/6844904077537574919 45个关于promise题
+
 const PENDING = 'PENDING'
 const FULFILLED = 'FULFILLED'
 const REJECTED = 'RECJECTED'
@@ -234,3 +236,14 @@ function x4(data){
 // },err=>{
 //   console.log('例子5 all,onRejected err',err);
 // })
+
+// 例子 6 取消promise ,每一个.then都是新的promise的then
+MyPromise.resolve().then(() => {
+  console.log('ok1')
+  return new MyPromise(()=>{})  // 返回“pending”状态的Promise对象
+}).then(() => {
+  // 后续的函数不会被调用
+  console.log('ok2')
+}).catch(err => {
+  console.log('err->', err)
+})

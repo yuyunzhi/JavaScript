@@ -58,6 +58,7 @@ class MyPromise {
             onFulfilledNext(value)
           } else {
             let res =  onFulfilled(value);
+            console.log('res',res);
             if (res instanceof MyPromise) {
               // 如果当前回调函数返回MyPromise对象，必须等待其状态改变后在执行下一个回调
               res.then(onFulfilledNext, onRejectedNext)
@@ -229,3 +230,16 @@ function x4(data){
 // },err=>{
 //   console.log('例子5 all,onRejected err',err);
 // })
+
+
+// 例子 6 取消promise ,每一个.then都是新的promise的then
+MyPromise.resolve().then(() => {
+  console.log('ok1')
+  return new MyPromise(()=>{})  // 返回“pending”状态的Promise对象
+}).then(() => {
+  // 后续的函数不会被调用
+  console.log('ok2')
+}).catch(err => {
+  console.log('err->', err)
+})
+
