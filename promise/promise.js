@@ -47,8 +47,8 @@ class MyPromise {
       // 链式.then 要考虑的 onFulfilled onFulfilledNext
       // onFulfilled 不为函数，则调用 onFulfilledNext()
       // onFulfilled 为函数，则调用 onFulfilled 得到返回值res
-            // res 为 promise 则 res.then(onFulfilledNext,onRejectedNext)
-            // res 不为 promise 则  onFulfilledNext()
+      // res 为 promise 则 res.then(onFulfilledNext,onRejectedNext)
+      // res 不为 promise 则  onFulfilledNext()
       // 报错用try catch拦截
 
       // 封装一个成功时执行的函数
@@ -114,12 +114,12 @@ class MyPromise {
     return new MyPromise(resolve => resolve(value))
   }
 
-  static reject(){
+  static reject(value){
     return new MyPromise((resolve ,reject) => reject(value))
   }
 
-  catch(){
-
+  catch(onRejected){
+    return this.then(undefined, onRejected)
   }
 
   static all(list){
@@ -127,7 +127,7 @@ class MyPromise {
     let count = 0
     return new MyPromise((resolve ,reject)=>{
       for(let key in list){
-        MyPromise.resolve(list[key]).then(res=>{
+        this.resolve(list[key]).then(res=>{
           result[key] = res
           count++
           if(count === list.length){
@@ -136,22 +136,27 @@ class MyPromise {
         },err=>{
           reject(err)
         })
-
       }
-
     })
   }
 
   static race(list){
-      return new MyPromise((resolve,reject)=>{
-        for(let key in list){
-          this.resolve(list[key]).then(res=>{
-            resolve(res)
-          },err=>{
-            reject(err)
-          })
-        }
-      })
+    return new MyPromise((resolve,reject)=>{
+      for(let key in list){
+        this.resolve(list[key]).then(res=>{
+          resolve(res)
+        },err=>{
+          reject(err)
+        })
+      }
+    })
+  }
+  finally(cb){
+    // 不管成功失败，都会调用这个方法cb()
+    return this.then(
+        value  => MyPromise.resolve(cb()).then(() => value),
+        reason => MyPromise.rsolve(cb()).then(() => { throw reason })
+    );
   }
 }
 
