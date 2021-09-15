@@ -152,10 +152,10 @@ class MyPromise {
     })
   }
   finally(cb){
-    // 不管成功失败，都会调用这个方法cb()
+    // 不管成功失败，都会调用这个方法cb(),在finally之后，还可以继续then。并且会将值原封不动的传递给后面的then
     return this.then(
         value  => MyPromise.resolve(cb()).then(() => value),
-        reason => MyPromise.rsolve(cb()).then(() => { throw reason })
+        reason => MyPromise.resolve(cb()).then(() => { throw reason })
     );
   }
 }
