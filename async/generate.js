@@ -33,11 +33,9 @@ function run(gFun,...initValue){
         reject(err)
       })
     })
-
   }
   return next()
 }
-
 
 function* start(x){
   let t1 = yield delayer(1025)
@@ -46,7 +44,6 @@ function* start(x){
   let t2 = yield delayer(1011)
   console.log('t2',t2);
   console.log('--------');
-
 }
 
 run(start,1).catch(err=>{
