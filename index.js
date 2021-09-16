@@ -205,7 +205,7 @@ MyPromise.prototype.finally = function (callBack) {
 MyPromise.race = function (list) {
   return new MyPromise((resolve, reject) => {
     for (let key in list) {
-      this.resolve(list[key]).then(res => {
+      list[key].then(res => {
         resolve(res)
       }, err => {
         reject(err)
@@ -567,9 +567,37 @@ function x(data) {
 //     .finally(() => console.log('finally2'))
 //
 
-function runAsync (x) {
-  const p = new Promise(r => setTimeout(() => r(x, console.log(x)), 1000))
-  return p
-}
-MyPromise.all([runAsync(1), runAsync(2), runAsync(3)])
-    .then(res => console.log(res))
+// 例子16 promise all 只要捕获到错误就会走reject，其他数据就不会出来了
+// function runAsync (x) {
+//   const p = new Promise(resolve => {
+//      setTimeout(() => {
+//       resolve(x, console.log('???',x))
+//     }, 1000)
+//   })
+//   return p
+// }
+// function runReject (x) {
+//   const p = new Promise((res, rej) => setTimeout(() => rej(`Error: ${x}`, console.log('!!!',x)), 1000 * x))
+//   return p
+// }
+// MyPromise.all([runAsync(1), runReject(4), runAsync(3), runReject(2)])
+//     .then(res => console.log('then',res))
+//     .catch(err => console.log('catch',err))
+
+// 例子17 race 第一个完成的第一个执行，最先报错的，后面都不会出来
+// function runAsync(x) {
+//   const p = new Promise(r =>
+//       setTimeout(() => r(x, console.log(x)), 1000)
+//   );
+//   return p;
+// }
+// function runReject(x) {
+//   const p = new Promise((res, rej) =>
+//       setTimeout(() => rej(`Error: ${x}`, console.log(x)), 1000 * x)
+//   );
+//   return p;
+// }
+// MyPromise.race([runReject(0), runAsync(1), runAsync(2), runAsync(3)])
+//     .then(res => console.log("result: ", res))
+//     .catch(err => console.log(err));
+
