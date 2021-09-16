@@ -1,4 +1,3 @@
-const isFunction = variable => typeof variable === 'function'
 const PENDING = 'pending' // 等待状态
 const FULFILLED = 'fulfilled' // 成功状态
 const REJECTED = 'rejected' // 失败状态
