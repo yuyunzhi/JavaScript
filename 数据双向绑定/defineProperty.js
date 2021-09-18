@@ -38,5 +38,6 @@ observe(data)
 // data.name = 'valley'
 // data.friends[0] = 4
 data.friends[3] = 5 // 非响应式
+data.friends.push (6) //非响应式
 // data.age = 6  //非响应式
-console.log(data.friends,data.friends[3]);
+console.log(data.friends);
