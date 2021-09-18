@@ -16,5 +16,11 @@ flat(arr)
 
 
 
+const arr1 = [ [1, 2, 2], [3, 4, 5, 5], 10];
+ // 只能对二维数组转化为一维数组，二维以上的不行
+console.log(Array.prototype.concat.apply([], arr1));
+
+
+
 
 
