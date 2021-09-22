@@ -1,4 +1,4 @@
-
+// 因为是浅拷贝，只对第一层挨个遍历拷贝，是对象那么拷贝的是引用地址，是基本类型的就是深拷贝
 function myObjectAssign(target) {
 
   if(typeof target !== 'object'){
