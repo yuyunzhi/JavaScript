@@ -13,4 +13,4 @@ for(let i = 0;i<arr.length;i++){
     hash[arr[i]] = true
 }
 
-Object.keys(hash) // ["1", "2", "3", "4", "5"]
+Object.keys(hash).map(Number) // [1, 2, 3, 4, 5]
