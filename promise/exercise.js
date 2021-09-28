@@ -189,3 +189,6 @@ downloadImageInNumber(urls).then(res=>{
   console.log('ok');
 })
 
+
+
+
