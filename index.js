@@ -1,11 +1,29 @@
-let arr = [1,1,2,2,3,3,4,5,8,8,9,3,5]
+class VueRouter{
+  constructor(options) {
+     this.options = options
 
-function set (arr){
-  let hash = {}
-  for(let i = 0;i<arr.length ;i++){
-    hash[arr[i]] = true
+    this.mode = options.mode || 'hash'
+
+    switch (this.mode){
+      case 'hash':
+        this.history = new HashHistory(this)
+        break
+      case 'history':
+        this.history = new HTML5History(this,options.base)
+        break
+    }
+
   }
-  return Object.keys(hash).map(Number)
+
+  init(app){
+
+  }
+
 }
 
-console.log(set(arr));
+
+VueRouter.install = (Vue)=>{
+
+}
+
+export default VueRouter
