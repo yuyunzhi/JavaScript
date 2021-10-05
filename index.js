@@ -1,29 +1,32 @@
-class VueRouter{
-  constructor(options) {
-     this.options = options
-
-    this.mode = options.mode || 'hash'
-
-    switch (this.mode){
-      case 'hash':
-        this.history = new HashHistory(this)
-        break
-      case 'history':
-        this.history = new HTML5History(this,options.base)
-        break
+class EventBus {
+  constructor() {
+    this.events = {}
+  }
+  on (eventName,fn){
+    if(this.events[eventName]){
+      this.events[eventName].push(fn)
+    }else{
+      this.events[eventName] = [fn]
     }
-
   }
-
-  init(app){
-
+  emit(eventName,data){
+    let fnArr = this.events[eventName]
+    if(fnArr){
+      fnArr.forEach(fn=>{
+        fn.call(null,data)
+      })
+    }
   }
-
 }
+const eventBus = new EventBus()
+eventBus.on('xxx',(data)=>{
+  console.log('xxx1',data);
+})
+eventBus.on('xxx',(data)=>{
+  console.log('xxx2',data);
+})
 
 
-VueRouter.install = (Vue)=>{
+eventBus.emit('xxx',111)
 
-}
 
-export default VueRouter

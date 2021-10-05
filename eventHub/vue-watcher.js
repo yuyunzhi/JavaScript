@@ -7,13 +7,13 @@ class Dep {
     this.subs.push(sub)
   }
 
-  depend() {
+  depend() { // on
     if (Dep.target) {
       Dep.target.addDep(this);
     }
   }
 
-  notify() {
+  notify() { // emit
     this.subs.forEach(sub => sub.update())
   }
 }
