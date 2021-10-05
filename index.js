@@ -1,32 +1,63 @@
-class EventBus {
-  constructor() {
-    this.events = {}
-  }
-  on (eventName,fn){
-    if(this.events[eventName]){
-      this.events[eventName].push(fn)
-    }else{
-      this.events[eventName] = [fn]
-    }
-  }
-  emit(eventName,data){
-    let fnArr = this.events[eventName]
-    if(fnArr){
-      fnArr.forEach(fn=>{
-        fn.call(null,data)
-      })
-    }
-  }
+
+function ajax (time = 0){
+  return new Promise((resolve => {
+    setTimeout(()=>{
+      resolve(1)
+    },time)
+  }))
 }
-const eventBus = new EventBus()
-eventBus.on('xxx',(data)=>{
-  console.log('xxx1',data);
-})
-eventBus.on('xxx',(data)=>{
-  console.log('xxx2',data);
-})
+
+// ajax().then(res=>{})
+// Promise.race([ajax(100),ajax(1000),ajax(500)]).then(res=>{})
+// Promise.all([ajax(100),ajax(1000),ajax(500)]).then(res=>{})
+// Promise.reject(1).then(res=>{})
+// Promise.reject(1).catch((res)=>{
+//   console.log(res);
+// })
+
+class MyPromise{
+
+}
 
 
-eventBus.emit('xxx',111)
+function myTypeof (data,type){
+  return Object.prototype.toString.call(data) === `[object ${type}]`
+}
 
 
+function deepClone(target){
+  let result
+
+  if(typeof target !== 'object'){
+    result = target
+  }else{
+    if(Array.isArray(target)){
+      // [] 递归
+      result = []
+      for(let key in target){
+        result.push(deepClone(target[key]))
+      }
+    }else if(target === null){
+      result = target
+    }else if(target.constructor === RegExp){
+      result = target
+    }else{
+      // {} 递归
+      result = {}
+      for(let key in target){
+        result[key] = deepClone(target[key])
+      }
+    }
+  }
+  return result
+}
+
+let obj = {
+  a: null,
+  b: undefined,
+  c: function () {},
+  d: [1, 2, 3],
+  e: {a: [], b: 'c'}
+}
+
+console.log(deepClone(obj));

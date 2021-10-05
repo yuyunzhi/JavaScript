@@ -32,6 +32,16 @@ function deepClone(target) {
   return result;
 }
 
+let obj = {
+  a: null,
+  b: undefined,
+  c: function () {
+  },
+  d: [1, 2, 3],
+  e: {a: [], b: 'c'}
+}
+
+console.log(deepClone(obj))
 // 利用JSON的方法实现简单的深拷贝
 
 //
