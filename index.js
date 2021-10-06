@@ -1,9 +1,8 @@
-
-function ajax (time = 0){
+function ajax(time = 0) {
   return new Promise((resolve => {
-    setTimeout(()=>{
+    setTimeout(() => {
       resolve(1)
-    },time)
+    }, time)
   }))
 }
 
@@ -15,19 +14,24 @@ function ajax (time = 0){
 //   console.log(res);
 // })
 
-ajax.call(obj,'xxx')
 
-obj.ajax()
-Function.prototype.myCall = function (context,...arguments){
-      if(typeof context !== 'function'){
-        throw new Error('不是函数')
-      }
 
-      context = context || window
+function throttle (fn){
+  let time = 1000
+  let preTimeStamp = new Date().getTime()
 
-      context.fn = this
-      const result = context.fn(...arguments)
+  const _throttle = (...args) => {
+    let curTimeStamp = new Date().getTime()
+    if(curTimeStamp - preTimeStamp > time){
+      // 执行代码
+      fn(...args)
+      preTimeStamp = curTimeStamp
+    }
+  }
 
-      return result
-
+  return _throttle
 }
+
+
+
+

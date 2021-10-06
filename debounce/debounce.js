@@ -13,6 +13,7 @@ function debounce (fn,delay){
   }
 }
 
+
 // 使用方式
 const log = debounce(()=>console.log('hello world'),5000)
 
@@ -42,6 +43,31 @@ useEffect(()=>{
 },[debounceValue])
 
 
+// input 防抖 debounce 简化版本
+
+function debounce(fn,time = 300){
+  let timer = null
+  const _debounce = (...args) =>{
+
+    if (timer) {
+      clearTimeout(timer)
+      timer = null
+      return
+    }
+
+    timer = setTimeout(() => {
+      fn(...args)
+      clearTimeout(timer)
+      timer = null
+    }, time)
+  }
+  _debounce.cancel = ()=>{
+    clearTimeout(timer)
+    timer = null
+  }
+
+  return _debounce
+}
 
 
 
