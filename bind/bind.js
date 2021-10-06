@@ -6,7 +6,7 @@ Array.prototype.myBind =  function (context,...rest){
   context.fn = this
 
   let newFnx = function (){
-    context.fn(...rest)
+    return context.fn(...rest)
   }
   return newFnx
 }

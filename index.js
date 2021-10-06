@@ -15,49 +15,19 @@ function ajax (time = 0){
 //   console.log(res);
 // })
 
-class MyPromise{
+ajax.call(obj,'xxx')
 
-}
-
-
-function myTypeof (data,type){
-  return Object.prototype.toString.call(data) === `[object ${type}]`
-}
-
-
-function deepClone(target){
-  let result
-
-  if(typeof target !== 'object'){
-    result = target
-  }else{
-    if(Array.isArray(target)){
-      // [] 递归
-      result = []
-      for(let key in target){
-        result.push(deepClone(target[key]))
+obj.ajax()
+Function.prototype.myCall = function (context,...arguments){
+      if(typeof context !== 'function'){
+        throw new Error('不是函数')
       }
-    }else if(target === null){
-      result = target
-    }else if(target.constructor === RegExp){
-      result = target
-    }else{
-      // {} 递归
-      result = {}
-      for(let key in target){
-        result[key] = deepClone(target[key])
-      }
-    }
-  }
-  return result
-}
 
-let obj = {
-  a: null,
-  b: undefined,
-  c: function () {},
-  d: [1, 2, 3],
-  e: {a: [], b: 'c'}
-}
+      context = context || window
 
-console.log(deepClone(obj));
+      context.fn = this
+      const result = context.fn(...arguments)
+
+      return result
+
+}

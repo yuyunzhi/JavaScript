@@ -1,12 +1,11 @@
-// 0、1、1、2、3、5、8、13、21、34、0、1、1、2、3、5、8、13、21、34、……
-// 0，1，2，3，4，5，6，7，8……
+// 首先，斐波那契数列从第0个开始，分别是 0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233……
 function fib0(n) {
   if (n === 0) return 0
   if (n === 1) return 1
   return fib0(n - 1) + fib0(n - 2)
 }
 
-
+// 维护一个长数组
 function fib1(n) {
   if (n === 0) return 0
   if (n === 1) return 1
@@ -20,14 +19,40 @@ function fib1(n) {
   return result[result.length - 1]
 }
 
-function fib2(n) {
-  let [v1, v2] = [0, 1]
-  for (let i = 2; i <= n; i++) {
-    [v1, v2] = [v2, v1 + v2]
+// 动态规划版本
+function fib2(n){
+  if(n === 0) return 0
+  if(n === 1) return 1
+  let a = 0
+  let b = 1
+  while(n>1){
+    [a,b] = [b,a+b]
+    n--
   }
-  return v2
+
+  return b
 }
 
-console.log(fib0(50));
-console.log(fib1(50));
-console.log(fib2(50));
+// 带缓存
+let cache = []
+
+function fib3(n){
+
+  if(cache[n]) return cache[n]
+
+  if (n === 0) {
+      cache[n] = 0
+    return 0
+  }
+  if (n === 1){
+    cache[n] = 1
+    return 1
+  }
+  cache[n] = fib3(n - 1) + fib3(n - 2)
+  return cache[n]
+}
+
+console.log('fib0',fib0(11));
+console.log('fib1',fib1(11));
+console.log('fib2',fib2(11));
+console.log('fib3',fib3(11));
