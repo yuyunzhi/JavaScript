@@ -18,6 +18,7 @@
 //   return ajax(3)
 // })
 
+
 // 方案2  由1 转变而来
 // let promiseList = [1,2,3]
 // let promise = Promise.resolve()
