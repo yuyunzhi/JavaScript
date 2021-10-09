@@ -17,10 +17,10 @@ class LRUCache {
     this.capacity = capacity
   }
   get(key){
-    if(!this.cache.hash(key)) return -1
+    if(!this.cache.has(key)) return -1
     // 只要我用了（get）某个值就把值放在数组的第三位（最新位置）
 
-    let tempCache = this.cache.hash(key)
+    let tempCache = this.cache.get(key)
     this.cache.delete(key)
     this.cache.set(key,tempCache)
 
@@ -28,16 +28,13 @@ class LRUCache {
 
   }
   put(key,cache){
-
     // 只要我存了put，就把存的值放在最新位置上
-
-    if(this.cache.hash(key)) {
+    if(this.cache.has(key)) {
       this.cache.delete(key)
     }
+
     this.cache.set(key,cache)
-
     // 然后判断长度，去掉第一位
-
     if(this.cache.size > this.capacity){
       // 注意，因为this.cache.keys() 返回的值是iterator，所以只能用next()获取第一个值 {done,value}
       let key = this.cache.keys().next().value

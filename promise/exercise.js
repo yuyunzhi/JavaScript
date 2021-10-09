@@ -1,13 +1,13 @@
 // 1、使用Promise实现每隔1秒输出1,2,3
-function ajax(number) {
-  return new Promise(resolve => {
-    setTimeout(() => {
-      console.log(number);
-      resolve(number);
-
-    }, 1000)
-  })
-}
+// function ajax(number) {
+//   return new Promise(resolve => {
+//     setTimeout(() => {
+//       console.log(number);
+//       resolve(number);
+//
+//     }, 1000)
+//   })
+// }
 
 // 方案 1
 // Promise.resolve().then(()=>{
