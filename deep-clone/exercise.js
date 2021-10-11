@@ -1,16 +1,26 @@
 // 定义一个深拷贝函数  接收目标target参数
-function deepClone(target) {
+function deepClone(target,map = new Map()) {
   // 定义一个变量
-  let result;
+  let result
+
   // 如果当前需要深拷贝的是一个对象的话
   if (typeof target === 'object') {
     // 如果是一个数组的话
+    console.log('map.get(target)',map.get(target));
+
+    if(map.get(target)){
+      return map.get(target)
+    }
+
+    map.set(target,target)
+
     if (Array.isArray(target)) {
       result = []; // 将result赋值为一个数组，并且执行遍历
       for (let i in target) {
         // 递归克隆数组中的每一项
-        result.push(deepClone(target[i]))
+        result.push(deepClone(target[i],map))
       }
+
       // 判断如果当前的值是null的话；直接赋值为null
     } else if(target===null) {
       result = null;
@@ -21,9 +31,10 @@ function deepClone(target) {
       // 否则是普通对象，直接for in循环，递归赋值对象的所有值
       result = {};
       for (let i in target) {
-        result[i] = deepClone(target[i]);
+        result[i] = deepClone(target[i], map);
       }
     }
+
     // 如果不是对象的话，就是基本数据类型，那么直接赋值
   } else {
     result = target;
@@ -38,10 +49,12 @@ let obj = {
   c: function () {
   },
   d: [1, 2, 3],
-  e: {a: [], b: 'c'}
+  e: {a: [], b: 'c'},
 }
+obj.f = obj
 
-console.log(deepClone(obj))
+
+console.log('-----',deepClone(obj))
 // 利用JSON的方法实现简单的深拷贝
 
 //
