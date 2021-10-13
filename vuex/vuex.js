@@ -1,10 +1,4 @@
 /* my-vuex/index.js */
-// 乞丐版本。。。
-// 乞丐版本。。。
-// 乞丐版本。。。
-// 乞丐版本。。。
-
-
 
 // 保存一个全局的 Vue 之后会用到
 let _Vue = null
@@ -18,10 +12,11 @@ class Store {
     const mutations = options.mutations || {}
     const actions = options.actions || {}
     const getters = options.getters || {}
+
     // 1.实现state 把 state 中的数据转为 响应式,直接用 Vue 中的 observable
     this.state = _Vue.observable(state)
 
-    // 2.实现 getters 这里为什么不知直接 把this.getters 赋值 {} 而是 Object.create(null)
+    // 2.实现 getters
     // 好处是不用考虑会和原型链上的属性重名问题
     this.getters = Object.create(null)
     // 我们要为 getters 添加一个 get 方法，这里就要使用 数据劫持
@@ -29,6 +24,7 @@ class Store {
     Object.keys(getters).forEach((key) => {
       // 第一个参数是给谁添加 ，第二个是添加的属性名，第三个对象里面可以设置很多参数
       // 比如 可枚举，可配置，get，set
+      // 使用方式 this.$store.getters.xxx
       Object.defineProperty(this.getters, key, {
         // 为 this.getters 每一项都添加 一个 get 方法
         get: () => {
@@ -40,7 +36,8 @@ class Store {
 
     // 3.实现 mutations
     // 先遍历 mutaions 中的对象进行改变 this指向
-    this.mutations = {}
+    this.mutations = {}  // key function , key ,function
+    // 使用方式 this.$store.commit('xxx','data')
     Object.keys(mutations).forEach((key) => {
       this.mutations[key] = (params) => {
         // 改变this指向 ，默认是要传入 state
@@ -76,7 +73,7 @@ class Store {
 
 // 因为Vuex 需要 Vue.use() 安装，所以我们必须要有个 install 方法 传入 Vue
 // 第二个参数是一个可选对象
-function install(Vue) {
+const install = function(Vue) {
   // 保存到全局 _Vue
   _Vue = Vue
   // 全局注册混入 这样在所有的组件都能使用 $store

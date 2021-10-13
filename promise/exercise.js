@@ -55,7 +55,6 @@
 // }
 
 // 3秒-红-2秒-黄-1秒-绿-3秒-红-2秒-黄-1秒-绿-……
-//
 // function lighten(fn,timer = 3000){
 //   return new Promise(resolve => {
 //     setTimeout(()=>{
