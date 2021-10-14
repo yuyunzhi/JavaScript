@@ -13,13 +13,17 @@ Array.prototype.myMap = function (fn, context) {
 // 使用reduce实现map
 Array.prototype.myMap2 = function (fn,context){
   const arr = Array.prototype.slice.call(this)
+  let newArray = []
   arr.reduce((pre,cur,index)=>{
-    return [...pre,fn.call(context,cur,index,arr)]
-  },[])
+    newArray.push(fn(cur,index,arr))
+  },0)
+
+  return newArray
 }
 
 
-
-[1, 2, 3, 4, 5].myMap((item, index, array) => {
+let a = [1, 2, 3, 4,5]
+let b = a.myMap2((item, index, array) => {
   return item + 1
 })
+console.log(b);
