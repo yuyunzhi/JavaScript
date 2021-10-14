@@ -1,4 +1,4 @@
-Array.prototype.myBind =  function (context,...rest){
+Function.prototype.myBind =  function (context,...rest){
   if(typeof this !== 'function'){
     throw TypeError('not a function')
   }
@@ -8,8 +8,9 @@ Array.prototype.myBind =  function (context,...rest){
   let newFnx = function (){
     return context.fn(...rest)
   }
+
   return newFnx
 }
 
-const a = b.bind('xxx',...args)
+
 
