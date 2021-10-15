@@ -17,7 +17,6 @@ Array.prototype.myMap2 = function (fn,context){
   arr.reduce((pre,cur,index)=>{
     newArray.push(fn(cur,index,arr))
   },0)
-
   return newArray
 }
 

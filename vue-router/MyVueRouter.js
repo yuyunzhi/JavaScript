@@ -44,6 +44,7 @@ class VueRouter{
   }
 
 }
+
 VueRouter.install = function (v) {
   Vue = v;
   Vue.mixin({
