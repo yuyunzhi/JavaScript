@@ -4,19 +4,19 @@
 // 按顺序执行fn里的同步代码，遇到宏任务或微任务分别加入队列。执行完fn里所有可以执行的同步代码后，才会执行console.log(1)
 
 // 例子1
-// async function async1() {
-//   console.log("async1 start");
-//   await async2();
-//   console.log("async1 end");
-// }
-// async function async2() {
-//   setTimeout(() => {
-//     console.log('timer')
-//   }, 0)
-//   console.log("async2");
-// }
-// async1();
-// console.log("start")
+async function async1() {
+  console.log("async1 start");
+  await async2();
+  console.log("async1 end");
+}
+async function async2() {
+  setTimeout(() => {
+    console.log('timer')
+  }, 0)
+  console.log("async2");
+}
+async1();
+console.log("start")
 
 // 例子2
 // async function async1() {
