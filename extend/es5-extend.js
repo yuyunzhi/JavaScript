@@ -45,8 +45,8 @@ s1.constructor === Student
 Student.constructor === Function
 Person.constructor === Function
 
-// 所以
 
+// 所以
 s1 instanceof Student //true
 s1 instanceof Person // true
 

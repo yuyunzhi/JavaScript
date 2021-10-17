@@ -1,49 +1,62 @@
-function deepClone(target, map = new Map()) {
+class EventBus {
 
-  if (typeof target === 'object') {
-
-    let isArray = Array.isArray(target)
-    let cloneTarget = isArray ? [] : {}
-
-    if (map.get(target)) {
-      return map.get(target)
-    }
-
-    map.set(target, cloneTarget)
-    console.log('target', target);
-    if (isArray) {
-      // []
-      for (let i in target) {
-        // 递归克隆数组中的每一项
-        cloneTarget.push(deepClone(target[i], map))
-      }
-    } else if (target === null) {
-      cloneTarget = null
-    } else if (target.constructor === RegExp) {
-      cloneTarget = target
-    } else {
-      // []
-      for (let key in target) {
-        cloneTarget[key] = deepClone(target[key], map)
-      }
-    }
-    return cloneTarget
-  } else {
-    return target
+  constructor() {
+    this.events = {}
   }
+
+  emit(eventName,data){
+    if(!this.events[eventName])return
+
+    this.events[eventName].forEach(cb=>{
+      cb(data)
+    })
+
+  }
+
+  on(eventName,fn){
+    if(this.events[eventName]){
+      this.events[eventName].push(fn)
+    }else{
+      this.events[eventName] = [fn]
+    }
+  }
+
+  off(eventName,callback) {
+    if (!this.events[eventName]) return
+    this.events[eventName] = this.events[eventName].filter(fn=>{
+      return callback !== fn
+    })
+  }
+
+  once(eventName,fn){
+    const one = ()=>{
+      fn()
+      this.off(eventName,one)
+    }
+    this.on(eventName,one)
+  }
+
 }
 
+const eventBus = new EventBus()
 
-let obj = {
-  a: null,
-  b: undefined,
-  c: function () {
-  },
-  d: [1, 2, 3],
-  e: {a: [], b: 'c'},
+eventBus.on('xxx',(res)=>{
+  console.log(1,res)
+})
+
+const handle = (res)=>{
+  console.log(2,res)
 }
-obj.f = obj
+eventBus.on('xxx',handle)
 
-let dep = deepClone(obj)
-console.log('-----', dep)
+eventBus.off('xxx',handle)
 
+eventBus.emit('xxx','data1')
+
+eventBus.once("dbClick", () => {
+  console.log(123456);
+})
+
+eventBus.emit("dbClick");
+
+eventBus.emit("dbClick");

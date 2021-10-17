@@ -84,8 +84,6 @@ class MyPromise {
         cb(data)
       }
     }
-
-
   }
 
   then(onFulfilled, onRejected) {
@@ -252,16 +250,14 @@ MyPromise.any = function (promiseList) {
     const resultArr = []
     const len = promiseList.length
     let currentIndex = 0
-    const getResult = (index, err) => {
-      resultArr[index] = err
-      if (++currentIndex === len) {
-        reject(resultArr)
-      }
-    }
+
     promiseList.map((res, index) => {
       if (res && typeof res.then == 'function') {
         res.then(resolve, (err) => {
-          getResult(index, err)
+          resultArr[index] = err
+          if (++currentIndex === len) {
+            reject(resultArr)
+          }
         })
       } else {
         resolve(res)
