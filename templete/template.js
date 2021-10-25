@@ -14,6 +14,7 @@ const render = (template, context) => {
 }
 
 const template = '{{name}}很厉害，才{{age}}岁，他少年{{obj.a}}，独力支持，做了{{obj.b.c}}。'
+
 const context = {
   name: '二月',
   age: '15',

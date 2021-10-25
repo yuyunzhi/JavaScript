@@ -1,10 +1,9 @@
 // 因为是浅拷贝，只对第一层挨个遍历拷贝，是对象那么拷贝的是引用地址，是基本类型的就是深拷贝
-function myObjectAssign(target) {
+function myObjectAssign(target,...copyList) {
 
   if(typeof target !== 'object'){
     return throw new TypeError('not object')
   }
-  const copyList = Array.prototype.slice.call(arguments,1)
 
   for(let i = 0;i<copyList.length;i++){
     let objectItem = copyList[i]
@@ -14,6 +13,7 @@ function myObjectAssign(target) {
             target[key] = objectItem[key]
           }
     }
+
   }
 
   return target
