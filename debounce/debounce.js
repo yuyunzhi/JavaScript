@@ -60,6 +60,8 @@ function debounce(fn,time = 300){
       clearTimeout(timer)
       timer = null
     }, time)
+
+
   }
   _debounce.cancel = ()=>{
     clearTimeout(timer)

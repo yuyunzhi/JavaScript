@@ -8,3 +8,4 @@ const myTypeOf = (target,type) =>{
 myTypeOf([],'Array') // true
 myTypeOf(1,'Number') // true
 
+

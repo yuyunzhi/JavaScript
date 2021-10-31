@@ -33,7 +33,7 @@ function throttle(fn, time) {
   return (...args) => {
     let now = new Date().getTime()
     if (now - previous > time) {
-      fn(args)
+      fn(...args)
       previous = now
     }
   }

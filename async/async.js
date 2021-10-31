@@ -4,20 +4,20 @@
 // 按顺序执行fn里的同步代码，遇到宏任务或微任务分别加入队列。执行完fn里所有可以执行的同步代码后，才会执行console.log(1)
 
 // 例子1
-async function async1() {
-  console.log("async1 start");
-  await async2();
-  console.log("async1 end");
-}
-
-async function async2() {
-  setTimeout(() => {
-    console.log('timer')
-  }, 0)
-  console.log("async2");
-}
-async1();
-console.log("start")
+// async function async1() {
+//   console.log("async1 start");
+//   await async2();
+//   console.log("async1 end");
+// }
+//
+// async function async2() {
+//   setTimeout(() => {
+//     console.log('timer')
+//   }, 0)
+//   console.log("async2");
+// }
+// async1();
+// console.log("start")
 
 // 例子2
 // async function async1() {
@@ -73,6 +73,7 @@ console.log("start")
 //   }, 2000)
 //   await new Promise(resolve => {
 //     console.log('promise1')
+//     resolve('x')
 //   })
 //   console.log('async1 end')
 //   return 'async1 success'
@@ -145,10 +146,10 @@ console.log("start")
 // async function async2 () {
 //   return new Promise((resolve, reject) => {
 //     console.log('async2')
-//     reject('error')
+//     reject('errorx')
 //   })
 // }
-// async1().then(res => console.log(res))
+// async1().then(res => console.log(res)).catch(err=>{console.log(err)})
 
 // 换成 throw new Error('error!!!') 一样
 // async function async1 () {

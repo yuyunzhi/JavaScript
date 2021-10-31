@@ -22,14 +22,11 @@ function run(gFun,...initValue){
   let gen = gFun(...initValue)
   function next(data){
     return new Promise((resolve,reject)=>{
-      console.log('data',data);
       let result = gen.next(data)
-      console.log('result',result);
       if(result.done) return
       result.value.then(res=>{
         next(res)
       }).catch((err)=>{
-        console.log('next error');
         reject(err)
       })
     })

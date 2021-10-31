@@ -1,4 +1,3 @@
-
 Array.prototype.myFilter = function (fn,context) {
   const arr = Array.prototype.slice.call(this)
   let filterArray = []

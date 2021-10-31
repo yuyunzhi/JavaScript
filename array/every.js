@@ -13,3 +13,4 @@ Array.prototype.myEvery = function (fn,context){
 let result = [2, 3, 0, 1, 4].myEvery((element, index, array)=>{
   return element >= 5; //数组中是否有一个元素大于 10
 })
+

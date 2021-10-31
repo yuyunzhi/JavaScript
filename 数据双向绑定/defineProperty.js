@@ -1,5 +1,6 @@
 function observe(data) {
   if(!data || typeof data !== 'object') return
+
   for(var key in data) {
     let val = data[key]
     Object.defineProperty(data, key, {
