@@ -15,9 +15,9 @@ function observe(data) {
         val = newVal
       }
     })
-    if(typeof val === 'object'){
-      observe(val)
-    }
+    // if(typeof val === 'object'){
+    //   observe(val)
+    // }
   }
 }
 

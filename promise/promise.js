@@ -297,7 +297,7 @@ MyPromise.allSettled = function (promiseList) {
       }
     }
     promiseList.map((res, index) => {
-      if (res && typeof res.then == 'function') {
+      if (res && typeof res.then === 'function') {
         res.then(
             (data) => {
               getResult(index, data, FULFILLED)

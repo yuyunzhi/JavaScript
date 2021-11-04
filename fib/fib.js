@@ -56,3 +56,13 @@ console.log('fib0',fib0(11));
 console.log('fib1',fib1(11));
 console.log('fib2',fib2(11));
 console.log('fib3',fib3(11));
+
+// 大数
+
+function fibx(n){
+  let [v1,v2] = [0n,1n]
+  for(let i= 2;i<=n;i++){
+    [v1,v2] = [v2,v1+v2]
+  }
+  return v2
+}
